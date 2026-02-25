@@ -159,6 +159,44 @@ t4() {
 
 prefix() {
 	cat << EOF >> "$1"
+
+# <font color=#39c5bb> :sparkles: 跳转 </font>
+
+> [rime码表](./DICT/rime)    
+> [sougou自定义码表](./DICT/sougou)    
+
+> [码表制作日志](./op-log.md)    
+
+> [工具说明](./bin/readme.md)    
+
+# <font color=#39c5bb> :sparkles: 目录结构 </font>
+
+\`\`\`shell
+├── bin                          # 指令工具,部分需要编译src下的makefile生成
+├── DICT                         # 码表目录
+│   ├── breakups                 # 码表的拆分
+│   ├── rime                     # rime用的码表
+│   ├── rime-purelua(deprecated  # 纯lua给rime用的码表（弃用
+│   └── sougou                   # sougou自定义码表
+├── LICENSE
+├── op-log.md
+├── readme.md
+├── share
+│   ├── base                     # 基础词源:来自单词翻译
+│   ├── dict-old(deprecated)     # 旧码表: 弃用
+│   ├── encoder-data-single      # 86单字表: 8105规范字和大范围被编码的字
+│   ├── freq                     # 450w频表
+│   ├── looks-good               # 看起来还不错的成语
+│   ├── pinyin                   # 90w拼音表
+│   └── res-pictures
+└── src
+    ├── binsrc                   # bin工具的源码
+    ├── c-core(deprecated)       # 旧的c解析码表用(弃用)
+    ├── CMakeLists.txt           # makefile会调用这个Cmakelists.txt
+    ├── cppcore                  # cpp写的表对象核心
+    └── makefile                 # cd到目录下运行make以运行这个makefile
+\`\`\`
+
 # <font color=#39c5bb> :sparkles: 输入法偏好配置 </font>
 
 - [x] <font color=#ffa500>切换: alt + shift</font>
@@ -166,11 +204,11 @@ prefix() {
 - [x] <font color=#ffa500>反查: \`\` \` \`\`</font>
 - [x] <font color=#ffa500>第四码不自动上屏，第五码顶上屏</font>
 - [x] <font color=#ffa500>\`空格\` \`;\` \`‘\`代表1,2,3候选</font>
-- [x] <font color=#ffa500>z键: 快捷语(rime中)，重复上次输入(搜狗五笔中)</font>
+- [x] <font color=#ffa500>z键: 快捷语前缀 </font>
 - [x] <font color=#ffa500>\`[\` \`]\`前后翻页</font>
 
 # <font color=#39c5bb> :sparkles: 86五笔字根表(取自搜狗五笔) </font>
-<img src="./share/res-pictures/root.jpg" width=800 alt="sougou" title="sougou">
+<img src="./share/res-pictures/root.jpg" width=800 alt="root" title="root">
 
 # <font color=#39c5bb> :sparkles: 86五笔编码规则(带扩展) </font>
 > 注:带()的部分为合理扩展内容,意味着向下兼容原版

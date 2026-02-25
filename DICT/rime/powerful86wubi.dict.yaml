@@ -2467,12 +2467,10 @@ asal	基本功
 asar	莺歌燕舞
 asb	基本险
 asbw	基本险
-asd	斯柯达
 asd	基本面
 asd	草木灰
 asdm	基本面
 asdo	草木灰
-asdp	斯柯达
 ase	蓝丁胶
 asep	苯胺
 aseu	蓝丁胶
@@ -14811,8 +14809,8 @@ fcbh	𨙸
 fcbm	支出
 fcbm	运出
 fcbn	去了
-fcbw	支队
 fcbw	去除
+fcbw	支队
 fcc	㙍
 fcca	走马观花
 fccc	却又
@@ -17494,6 +17492,7 @@ fqgk	无事
 fqgm	截然不同
 fqgn	无瑕
 fqgt	地久天长
+fqgx	元素
 fqgx	无毒
 fqh	无触点
 fqha	远虑
@@ -20727,8 +20726,8 @@ ggtq	再平衡
 ggtr	球形物
 ggts	一条
 ggts	一箱
+ggtt	五笔
 ggtt	开玩笑
-ggtt	一笔
 ggtv	一律
 ggty	不来往
 ggu	玶
@@ -35521,9 +35520,9 @@ khkk	路口
 khkn	遗嘱
 khks	躁
 khl	盅
-khlf	中转
-khlf	盅
 khlf	跳转
+khlf	盅
+khlf	中转
 khlg	中国
 khlg	跨国
 khlg	跑车
@@ -53255,9 +53254,7 @@ quog	包装业
 quoj	镨
 quoo	龟头炎
 qup	镑
-qup	外交官
-qup	外交家
-qup	解剖室
+qup	多音字
 qupe	外交家
 qupg	解剖室
 qupg	儿童室
@@ -64634,9 +64631,8 @@ tgft	管理者
 tgft	生还者
 tgfu	生境
 tgfw	等于零
-tgg	第一天
+tgg	得不到
 tgg	毛玻璃
-tgg	香豆素
 tgga	重型
 tgga	重开
 tgga	处死刑
@@ -87153,8 +87149,8 @@ yys	诉讼权
 yysa	方框
 yysc	设计权
 yysc	诉讼权
-yysg	广西
 yysg	文本
+yysg	广西
 yysi	文档
 yysi	主文档
 yysu	就这样
@@ -87251,3 +87247,9 @@ yyyw	认识论
 yyyx	应变率
 yyyy	言
 yyyy	方言
+rcsj	反查
+pgwu	定位
+ycet	弃用
+pbyn	字词
+hige	频表
+qupb	多音字
