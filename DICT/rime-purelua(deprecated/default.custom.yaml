@@ -1,0 +1,101 @@
+
+# default.custom.yaml
+# 用户数据目录定位(通常UI配置界面里找，可能与XDG环境有关):
+# ~/.var/app/org.fcitx.Fcitx5/data/fcitx5/rime (linux flatpak: rime for fcitx5)
+# ~/.local/share/fcitx5/rime                   (linux:  如pacman里的fcitx5-rime)
+# ~/Library/Rime                               (macos:  maybe)
+# %APPDATA%\Rime                               (windows:maybe)
+
+patch:
+  schema_list:
+    - schema: power86wubi      # 帕瓦.power86
+
+  key_binder:
+    bindings:
+      - { when: has_menu, accept: semicolon,  send: 2 }  # 分号  `;`映射到候选2
+      - { when: has_menu, accept: apostrophe, send: 3 }  # 单引号`'`映射到候选3
+      - { when: has_menu, accept: bracketleft, send: Page_Up }    # `[` 映射到pageup
+      - { when: has_menu, accept: bracketright, send: Page_Down } # `]` 映射到pagedown
+
+      - { when: always, accept: Shift_L, toggle: ascii_mode }
+      - { when: always, accept: Shift_R, toggle: ascii_mode }
+
+  style:
+    font_face: "HanaMinA, HanaMinB" 
+    font_point: 15     #字号
+    label_format: '%s' #候选标签格式
+    horizontal: true   #竖
+    line_spacing: 1    #行距
+    inline_preedit: true #内嵌
+
+  punctuator:
+    full_shape:
+      " ": {commit: "　"}
+      "!": {commit: "！"}
+      "\"": {pair: ["“", "”"]}
+      "#": ["＃", "⌘"]
+      "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+      "%": ["％", "°", "℃"]
+      "&": "＆"
+      "'": {pair: ["‘", "’"]}
+      "(": "（"
+      ")": "）"
+      "*": ["・","·","＊", "×", "※", "❂"]
+      "+": "＋"
+      ",": {commit: "，"}
+      "-": "－"
+      .: {commit: "。"}
+      "/": ["／", "÷"]
+      ":": {commit: "："}
+      ";": {commit: "；"}
+      "<": ["《", "〈", "«", "‹"]
+      "=": "＝"
+      ">": ["》", "〉", "»", "›"]
+      "?": {commit: "？"}
+      "@": ["＠", "☯"]
+      "[": ["「", "【", "〔", "［"]
+      "\\": ["、", "＼"]
+      "]": ["」", "】", "〕", "］"]
+      "^": {commit: "……"}
+      _: "——"
+      "`": "｀"
+      "{": ["『", "〖", "｛"]
+      "|": ["·", "｜", "§", "¦"]
+      "}": ["』", "〗", "｝"]
+      "~": "～"
+
+    half_shape:
+      "!": {commit: "！"}
+      "\"": {pair: ["“", "”"]}
+      "#": "#"
+      "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+      "%": ["%", "％", "°", "℃"]
+      "&": "&"
+      "'": {pair: ["‘", "’"]}
+      "(": "（"
+      ")": "）"
+      "*": ["*","・", "＊", "·",  "×", "※", "❂"]
+      "+": "+"
+      ",": {commit: "，"}
+      "-": "-"
+      .: {commit: "。"}
+      "/": ["、", "/", "／", "÷"]
+      ":": {commit: "："}
+      ";": {commit: "；"}
+      "<": ["《", "〈", "«", "‹"]
+      "=": "="
+      ">": ["》", "〉", "»", "›"]
+      "?": {commit: "？"}
+      "@": "@"
+      "[": ["「", "【", "〔", "［"]
+      "\\": ["、", "\\", "＼"]
+      "]": ["」", "】", "〕", "］"]
+      "^": {commit: "……"}
+      _: "——"
+      "`": "`"
+      "{": ["『", "〖", "｛"]
+      "|": ["·", "|", "｜", "§", "¦"]
+      "}": ["』", "〗", "｝"]
+      "~": ["~", "～"]
+
+
