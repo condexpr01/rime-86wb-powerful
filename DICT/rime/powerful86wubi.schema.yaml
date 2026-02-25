@@ -1,0 +1,163 @@
+# powerful 86 wubi
+
+schema:
+  name: "帕瓦芙.powerful86wubi"
+  schema_id: powerful86wubi
+  version: "2026.02.25.1"
+  authoer: "Vito <condexpr01@outlook.com>"
+  description: ""
+  dependencies: ["powerful86pinyin"]
+
+engine:
+  processors: #按键消息
+
+    - ascii_composer # 用于中英切换，控制键行为
+
+    - recognizer     # 用于正则匹配patterns: reverse_lookup
+
+    - key_binder     # 用`候选`及`翻页`的改键,映射传到selector
+
+    - speller        # 用于过滤非[a-z], 控制第5码顶上屏
+
+    - punctuator     # 用于接收符号字符
+
+    - selector       # 用于选候选,像[0-9],up,down,pageup,pagedown等
+
+    - express_editor # 用于接收处理: 首选, 编码上屏, 回退(space,enter,backspace)
+
+  segmentors: #按键分段
+
+    - matcher            # 用于给反查的patterns分段
+
+    - abc_segmentor      # 用于字母分段标记
+
+    - punct_segmentor    # 用于给符号字符分段标记
+
+  translators: # 片段翻译
+
+    - lua_translator@time       # 用于翻译'time'产生时间候选
+
+    - table_translator          # 用于从translator指定码表翻译字母段
+
+    - punct_translator          # 用于按punctuator表翻译
+
+    - reverse_lookup_translator # 用于给patterns: reverse_lookup匹配的段反查
+
+
+# 中英切换，控制键行为
+ascii_composer:
+  # inline_ascii  临时英文
+  # commit_text   候选上屏并切换至英文
+  # commit_code   编码上屏并切换至英文
+  good_old_caps_lock: true #cap键会切换大小写
+  switch_key:
+    Caps_Lock: clear
+    Control_L: noop
+    Control_R: noop
+    Eisu_toggle: clear
+    Shift_L: commit_code
+    Shift_R: commit_code
+
+# grave作为反查前缀
+recognizer:
+  patterns:
+    reverse_lookup: "`[a-z]*$"
+
+# 2、3候选及翻页改到';' "'" '[' ']'
+key_binder:
+  bindings:
+    - { when: has_menu, accept: semicolon,  send: 2 }  # 分号  `;`映射到候选2
+    - { when: has_menu, accept: apostrophe, send: 3 }  # 单引号`'`映射到候选3
+    - { when: has_menu, accept: bracketleft, send: Page_Up }    # `[` 映射到pageup
+    - { when: has_menu, accept: bracketright, send: Page_Down } # `]` 映射到pagedown
+
+# 接收[a-y],z接收但编码为功能性,长度到超过4就顶上屏
+speller:
+  alphabet: abcdefghijklmnopqrstuvwxyz
+  max_code_length: 4
+
+
+# 符号表
+punctuator:
+  full_shape:
+    " ": {commit: "　"}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": ["＃", "⌘"]
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["％", "°", "℃"]
+    "&": "＆"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["・", "·", "＊", "×", "※", "❂"]
+    "+": "＋"
+    ",": {commit: "，"}
+    "-": "－"
+    .: {commit: "。"}
+    "/": ["／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "＝"
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "｀"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": "～"
+  half_shape:
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": "#"
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["%", "％", "°", "℃"]
+    "&": "&"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["*","・", "＊", "·",  "×", "※", "❂"]
+    "+": "+"
+    ",": {commit: "，"}
+    "-": "-"
+    .: {commit: "。"}
+    "/": ["、", "/", "／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "="
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": "@"
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "\\", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "`"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "|", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["~", "～"]
+
+
+# 反查表
+reverse_lookup:
+  dictionary: powerful86pinyin
+  prefix: "`"
+  tips: ""
+
+# 指定码表
+translator:
+  dictionary: powerful86wubi # power86fulwubi.dict.yaml
+  enable_user_dict: false    # 不启用用户词典
+  enable_sentence: false     # 不造句
+
+

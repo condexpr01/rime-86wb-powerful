@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+# 分码长,搜狗格式
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <dictionary_file>"
+	echo "dictionary_file format: 编码,序号=字词,频数\n"
+	echo "拆分后可以用breakupds-merge合并"
+	exit 1
+else
+	grep -P '^[^,]*,[0-9]*=[^,\n](,|\n)' "$1" > breakup1.txt
+	grep -P '^[^,]*,[0-9]*=[^,\n][^,\n](,|\n)' "$1" > breakup2.txt
+	grep -P '^[^,]*,[0-9]*=[^,\n][^,\n][^,\n](,|\n)' "$1" > breakup3.txt
+	grep -P '^[^,]*,[0-9]*=[^,\n][^,\n][^,\n][^,\n](,|\n)' "$1" > breakup4.txt
+	grep -P '^[^,]*,[0-9]*=[^,\n][^,\n][^,\n][^,\n][^,\n]' "$1" > breakup-n.txt
+fi
+
+
