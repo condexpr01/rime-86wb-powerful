@@ -1,0 +1,53 @@
+#!/usr/bin/bash
+
+# 按行用ai模型对词典进行过滤
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <dictionary-file>"
+	echo "dictionary_file std format: 编码,序号=字词[,频数]\n"
+	exit 1
+fi
+
+file="$1"
+
+model='huihui_ai/deepseek-r1-abliterated:latest'
+
+ollama_call_with_args(){
+
+:<<EOF
+	curl -X POST http://localhost:11434/api/chat -s \
+		-d "{
+			\"model\": \"$model\",
+			\"messages\": [{
+				\"role\": \"system\",
+				\"content\": \"${1}\"
+			}],
+			\"stream\": false,
+			\"think\": false
+		}" | jq '.message.content'
+EOF
+
+
+#:<<EOF
+	curl http://localhost:11434/api/generate -s \
+		-d "{
+			\"model\": \"$model\",
+			\"prompt\": \"${1}\",
+			\"stream\": false,
+			\"think\": false
+		}" | jq '.response'
+#EOF
+
+}
+
+# 按行读取文件并过滤
+for line in $(cat "$file"); do
+	printf "\n%s\n" "$line"
+	line=$(echo "$line" | sed 's/^[a-z]*,[0-9]*=//' |sed 's/,[0-9]*$//')
+	printf "content: %s\n" "$line"
+
+	ollama_call_with_args "禁止回复任何多余一切内容, 回答：\`${line}\`是不是正确的词？回答字符串"yes"或"no"。"
+done
+
+
+

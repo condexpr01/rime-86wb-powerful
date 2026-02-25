@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <dictionary_file>"
+	echo "dictionary_file format: 编码,序号=字词,频数\n"
+	exit 1
+else
+	"${SCRIPT_DIR}"/codec-seq-sort "${1}" | sed 's/^\([^,]*\),[^=]*=\([^,]*\).*$/\1\t\2/'
+fi

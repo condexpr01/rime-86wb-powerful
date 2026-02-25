@@ -1,0 +1,252 @@
+#!/usr/bin/bash
+
+# 将词典格式化生成一份markdown
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <dictionary_file>"
+	echo "dictionary_file std format: 编码,序号=字词[,频数]\n"
+	exit 1
+fi
+
+dict="$1"
+
+sort-rule(){
+	printf '## <font color=#39c5bb> :sparkles: 词库排序大体规则 </font>\n\n'
+
+	printf '> <font color=#ffa500>1号排字, 2号排`词/键名字`, 3号及以上排更多可能的选择</font><br>\n'
+	printf '> <font color=#ffa500>当1号实在没有字时, 1号排`词`, 2号及以上排更多可能的选择</font><br>\n'
+
+	printf '\n---\n\n'
+}
+
+preformance(){
+	printf '## <font color=#39c5bb> :sparkles: 测试性能记录 </font>\n\n'
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf '| 词库行数 | 测试码长 |\n'
+	printf '|:-:|:-:|\n'
+	printf "| $(wc -l "${dict}") | unknown |\n"
+
+	printf '\n</font>\n'
+
+	printf '\n---\n\n'
+}
+
+q1dash1() { echo -n $(grep -P "^${1},1=" ${dict} | sed 's/^.,1=//' |sed 's/,[0-9]*$//'); }
+q1dash2() { echo -n $(grep -P "^${1},2=" ${dict} | sed 's/^.,2=//' |sed 's/,[0-9]*$//'); }
+
+t1() {
+	printf '## <font color=#39c5bb> :sparkles: 1码 </font>\n'
+
+	printf '* <font color=#39c5bb> :rocket: 1简1号</font>\n\n'
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash1 g)" "$(q1dash1 f)" "$(q1dash1 d)" "$(q1dash1 s)" "$(q1dash1 a)"
+	printf "|:-:|:-:|:-:|:-:|:-:|\n"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash1 h)" "$(q1dash1 j)" "$(q1dash1 k)" "$(q1dash1 l)" "$(q1dash1 m)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash1 t)" "$(q1dash1 r)" "$(q1dash1 e)" "$(q1dash1 w)" "$(q1dash1 q)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash1 y)" "$(q1dash1 u)" "$(q1dash1 i)" "$(q1dash1 o)" "$(q1dash1 p)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash1 n)" "$(q1dash1 b)" "$(q1dash1 v)" "$(q1dash1 c)" "$(q1dash1 x)"
+
+	printf '\n</font>\n\n'
+
+	printf '* <font color=#39c5bb> :rocket: 1简2号(键名字,个别与1简1号重复的带改动)</font>\n\n'
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash2 g)" "$(q1dash2 f)" "$(q1dash1 d)" "$(q1dash2 s)" "$(q1dash2 a)"
+	printf "|:-:|:-:|:-:|:-:|:-:|\n"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash2 h)" "$(q1dash2 j)" "$(q1dash1 k)" "$(q1dash2 l)" "$(q1dash2 m)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash2 t)" "$(q1dash2 r)" "$(q1dash1 e)" "$(q1dash2 w)" "$(q1dash2 q)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash2 y)" "$(q1dash2 u)" "$(q1dash1 i)" "$(q1dash2 o)" "$(q1dash2 p)"
+	printf "|%s|%s|%s|%s|%s|\n" "$(q1dash2 n)" "$(q1dash2 b)" "$(q1dash1 v)" "$(q1dash2 c)" "$(q1dash2 x)"
+
+	printf '\n</font>\n\n'
+
+}
+
+qvdash1() { echo -n $(grep -P "^${v}${1},1=" ${dict}|sed 's/,[0-9]*$//'); }
+qvdash2() { echo -n $(grep -P "^${v}${1},2=" ${dict}|sed 's/,[0-9]*$//'); }
+
+t2() {
+
+	printf '\n## <font color=#39c5bb> :sparkles: 2码 </font>\n'
+	printf '> <font color=#ffa500>2简1号,常为字,`直观2码单字`</font>\n'
+	printf '> <font color=#ffa500>2简2号,常为2字词,高频词和容易记住的叠叠字</font>\n\n'
+
+	for v in {a..y}; do
+		printf '<font color=#ffa500>\n\n'
+
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash1 g)" "$(qvdash1 f)" "$(qvdash1 d)" "$(qvdash1 s)" "$(qvdash1 a)"
+		printf "|:-|:-|:-|:-|:-|\n"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash2 g)" "$(qvdash2 f)" "$(qvdash2 d)" "$(qvdash2 s)" "$(qvdash2 a)"
+		printf "||||||\n"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash1 h)" "$(qvdash1 j)" "$(qvdash1 k)" "$(qvdash1 l)" "$(qvdash1 m)"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash2 h)" "$(qvdash2 j)" "$(qvdash2 k)" "$(qvdash2 l)" "$(qvdash2 m)"
+		printf "||||||\n"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash1 t)" "$(qvdash1 r)" "$(qvdash1 e)" "$(qvdash1 w)" "$(qvdash1 q)"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash2 t)" "$(qvdash2 r)" "$(qvdash2 e)" "$(qvdash2 w)" "$(qvdash2 q)"
+		printf "||||||\n"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash1 y)" "$(qvdash1 u)" "$(qvdash1 i)" "$(qvdash1 o)" "$(qvdash1 p)"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash2 y)" "$(qvdash2 u)" "$(qvdash2 i)" "$(qvdash2 o)" "$(qvdash2 p)"
+		printf "||||||\n"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash1 n)" "$(qvdash1 b)" "$(qvdash1 v)" "$(qvdash1 c)" "$(qvdash1 x)"
+		printf "|%s|%s|%s|%s|%s|\n" "$(qvdash2 n)" "$(qvdash2 b)" "$(qvdash2 v)" "$(qvdash2 c)" "$(qvdash2 x)"
+
+		printf '\n</font>\n\n'
+		printf '\n---\n\n'
+	done
+
+}
+
+q3dash1len3() { echo -n "$(grep -P "^...,1=[^,][^,][^,]" ${dict} |sed 's/,[0-9]*$//')"; }
+q3dash2len3() { echo -n "$(grep -P "^...,2=[^,][^,][^,]" ${dict} |sed 's/,[0-9]*$//')"; }
+
+t3() {
+
+	printf '\n## <font color=#39c5bb> :sparkles: 3码 </font>\n'
+	printf '> <font color=#ffa500>3码内容过多不宜展示。</font>\n\n'
+
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf '| 3码1号位为3字词总数 |与理论最高值比(%d/%d)|\n' $(q3dash1len3|wc -l) $((25*25*25))
+	printf "|:-:|:-:|\n"
+	printf "|%s|%.2f %%|\n" "$(q3dash1len3 | wc -l )" \
+							"$(awk "BEGIN{printf \"%.2f\",$(q3dash1len3|wc -l)*100/$((25*25*25)) }" )"
+
+	printf '\n</font>\n\n'
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf '| 3码2号位为3字词总数 |与理论最高值比(%d/%d)|\n' $(q3dash2len3|wc -l) $((25*25*25))
+	printf "|:-:|:-:|\n"
+	printf "|%s|%.2f %%|\n" "$(q3dash2len3 | wc -l )" \
+							"$(awk "BEGIN{printf \"%.2f\",$(q3dash2len3|wc -l)*100/$((25*25*25)) }" )"
+
+	printf '\n</font>\n\n'
+}
+
+
+q4dash1len4() { echo -n "$(grep -P "^....,1=[^,][^,][^,][^,]" ${dict}|sed 's/,[0-9]*$//' )"; }
+q4dash2len4() { echo -n "$(grep -P "^....,2=[^,][^,][^,][^,]" ${dict}|sed 's/,[0-9]*$//' )"; }
+
+t4() {
+	printf '\n## <font color=#39c5bb> :sparkles: 4码 </font>\n'
+	printf '> <font color=#ffa500>4码为全码，内容过多不宜展示。</font>\n\n'
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf '| 4码1号位为4字词总数 |与理论最高值比(%d/%d)|\n' $(q4dash1len4|wc -l) $((25*25*25*25))
+	printf "|:-:|:-:|\n"
+	printf "|%s|%.2f %%|\n" "$(q4dash1len4 | wc -l )" \
+							"$(awk "BEGIN{printf \"%.2f\",$(q4dash1len4|wc -l)*100/$((25*25*25*25)) }" )"
+
+	printf '\n</font>\n\n'
+
+
+	printf '<font color=#ffa500>\n\n'
+
+	printf '| 4码2号位为4字词总数 |与理论最高值比(%d/%d)|\n' $(q4dash2len4|wc -l) $((25*25*25*25))
+	printf "|:-:|:-:|\n"
+	printf "|%s|%.2f %%|\n" "$(q4dash2len4 | wc -l )" \
+							"$(awk "BEGIN{printf \"%.2f\",$(q4dash2len4|wc -l)*100/$((25*25*25*25)) }" )"
+
+	printf '\n</font>\n\n'
+}
+
+prefix() {
+	cat << EOF >> "$1"
+# <font color=#39c5bb> :sparkles: 输入法偏好配置 </font>
+
+- [x] <font color=#ffa500>切换: alt + shift</font>
+- [x] <font color=#ffa500>临时切换: shift</font>
+- [x] <font color=#ffa500>反查: \`\` \` \`\`</font>
+- [x] <font color=#ffa500>第四码不自动上屏，第五码顶上屏</font>
+- [x] <font color=#ffa500>\`空格\` \`;\` \`‘\`代表1,2,3候选</font>
+- [x] <font color=#ffa500>z键: 快捷语(rime中)，重复上次输入(搜狗五笔中)</font>
+- [x] <font color=#ffa500>\`[\` \`]\`前后翻页</font>
+
+# <font color=#39c5bb> :sparkles: 86五笔字根表(取自搜狗五笔) </font>
+<img src="./share/res-pictures/root.jpg" width=800 alt="sougou" title="sougou">
+
+# <font color=#39c5bb> :sparkles: 86五笔编码规则(带扩展) </font>
+> 注:带()的部分为合理扩展内容,意味着向下兼容原版
+
+* <font color=#39c5bb>识别码</font><br>
+
+> <font color=#ffa500>字结构可以分为\`左右型\` \`上下型\` \`杂合型\`</font>
+> <font color=#ffa500>取最后一笔所在区的结构对应按键为识别码</font>
+
+<font color=#ffa500>
+
+||左右|上下|杂合|
+|-|-|-|-|
+|横|g|f|d|
+|竖|h|j|k|
+|撇|t|r|e|
+|捺|y|u|i|
+|折|n|b|v|
+
+</font>
+
+* <font color=#39c5bb>字</font><br>
+
+<font color=#ffa500>
+
+|一般字|成字字根|键名字|笔画字|
+|-|-|-|-|
+|每次取主观上<br>\`最大的字根\`<br>3码未取完<br>取末笔识别码|输入\`所在位置\`后,<br>加上\`笔画\`<br>3码未完<br>取末笔画|(\`1简2号\`)或<br>输入4次所在位置|ggll<br>hhll<br>ttll<br>yyll<br>nnll|
+
+</font>
+
+* <font color=#39c5bb>词</font>
+
+<font color=#ffa500>
+
+|二字|三字|多字|
+|-|-|-|
+|(每字的前1码)<br>或<br>每字的前2码|每字的前1码<br>或<br>每字的前1码最后一字取2码|每字的前1码最后一字取2码|
+
+</font>
+EOF
+}
+
+suffix() {
+	cat << EOF >> "$1"
+<font color=#ff0044>
+
+<center>$(date)</center>
+<center>Written by Vito Devlin(condexpr01@outlook.com) :tada: </center>
+
+<center>Auto generated by running: \`${0} ${dict} \` </center>
+
+</font>
+EOF
+}
+
+
+all() {
+	touch "$1" && echo '' > "$1"
+
+	prefix "$1"
+
+	printf "\n\n# <font color=#39c5bb>:sparkles: 词库</font>\n\n" >> "$1"
+
+	echo "$(sort-rule)" >> "$1"
+	echo "$(preformance)" >> "$1"
+	echo "$(t1)" >> "$1"
+	echo "$(t2)" >> "$1"
+	echo "$(t3)" >> "$1"
+	echo "$(t4)" >> "$1"
+
+	suffix "$1"
+}
+
+
+
+all readme.md
+
+

@@ -1,0 +1,31 @@
+#!/usr/bin/bash
+
+# 合并分码长文件
+
+if ! [ -f breakup1.txt ]; then
+	echo "breakup1.txt not found!"
+	exit 1
+fi
+
+if ! [ -f breakup2.txt ]; then
+	echo "breakup2.txt not found!"
+	exit 1
+fi
+
+if ! [ -f breakup3.txt ]; then
+	echo "breakup3.txt not found!"
+	exit 1
+fi
+
+if ! [ -f breakup4.txt ]; then
+	echo "breakup4.txt not found!"
+	exit 1
+fi
+
+if ! [ -f breakup-n.txt ]; then
+	cat breakup1.txt breakup2.txt breakup3.txt breakup4.txt
+	exit 1
+fi
+
+cat breakup1.txt breakup2.txt breakup3.txt breakup4.txt breakup-n.txt
+

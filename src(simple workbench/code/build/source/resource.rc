@@ -1,4 +1,0 @@
-//Written by Vito(DevVitoP)
-
-#define ICO 0x0001
-ICO ICON ".\\icon.ico"

@@ -1,0 +1,104 @@
+
+patch:
+  schema_list:
+    - schema: powerful86wubi
+
+  key_binder:
+    bindings:
+      - { when: has_menu, accept: semicolon,  send: 2 }  # 分号  `;`映射到候选2
+      - { when: has_menu, accept: apostrophe, send: 3 }  # 单引号`'`映射到候选3
+      - { when: has_menu, accept: bracketleft, send: Page_Up }    # `[` 映射到pageup
+      - { when: has_menu, accept: bracketright, send: Page_Down } # `]` 映射到pagedown
+
+      - { when: always, accept: Shift_L, toggle: ascii_mode }
+      - { when: always, accept: Shift_R, toggle: ascii_mode }
+
+  menu:
+    # 空格,分号,单引(对应3选一页)
+    page_size: 3
+    alternative_select_labels: [ "", "", "" ]  # 修改候選標籤
+
+  ascii_composer:
+    # inline_ascii  临时英文
+    # commit_text   候选上屏并切换至英文
+    # commit_code   编码上屏并切换至英文
+    # noop/clear    空操作/清除
+    good_old_caps_lock: true #cap键会切换大小写
+    switch_key:
+      Caps_Lock: clear
+      Control_L: noop
+      Control_R: noop
+      Eisu_toggle: clear
+      Shift_L: commit_code
+      Shift_R: commit_code
+
+  punctuator:
+    full_shape:
+      " ": {commit: "　"}
+      "!": {commit: "！"}
+      "\"": {pair: ["“", "”"]}
+      "#": ["＃", "⌘"]
+      "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+      "%": ["％", "°", "℃"]
+      "&": "＆"
+      "'": {pair: ["‘", "’"]}
+      "(": "（"
+      ")": "）"
+      "*": ["・", "·", "＊", "×", "※", "❂"]
+      "+": "＋"
+      ",": {commit: "，"}
+      "-": "－"
+      .: {commit: "。"}
+      "/": ["／", "÷"]
+      ":": {commit: "："}
+      ";": {commit: "；"}
+      "<": ["《", "〈", "«", "‹"]
+      "=": "＝"
+      ">": ["》", "〉", "»", "›"]
+      "?": {commit: "？"}
+      "@": ["＠", "☯"]
+      "[": ["「", "【", "〔", "［"]
+      "\\": ["、", "＼"]
+      "]": ["」", "】", "〕", "］"]
+      "^": {commit: "……"}
+      _: "——"
+      "`": "｀"
+      "{": ["『", "〖", "｛"]
+      "|": ["·", "｜", "§", "¦"]
+      "}": ["』", "〗", "｝"]
+      "~": "～"
+
+    half_shape:
+      "!": {commit: "！"}
+      "\"": {pair: ["“", "”"]}
+      "#": "#"
+      "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+      "%": ["%", "％", "°", "℃"]
+      "&": "&"
+      "'": {pair: ["‘", "’"]}
+      "(": "（"
+      ")": "）"
+      "*": ["*","・", "＊", "·",  "×", "※", "❂"]
+      "+": "+"
+      ",": {commit: "，"}
+      "-": "-"
+      .: {commit: "。"}
+      "/": ["、", "/", "／", "÷"]
+      ":": {commit: "："}
+      ";": {commit: "；"}
+      "<": ["《", "〈", "«", "‹"]
+      "=": "="
+      ">": ["》", "〉", "»", "›"]
+      "?": {commit: "？"}
+      "@": "@"
+      "[": ["「", "【", "〔", "［"]
+      "\\": ["、", "\\", "＼"]
+      "]": ["」", "】", "〕", "］"]
+      "^": {commit: "……"}
+      _: "——"
+      "`": "`"
+      "{": ["『", "〖", "｛"]
+      "|": ["·", "|", "｜", "§", "¦"]
+      "}": ["』", "〗", "｝"]
+      "~": ["~", "～"]
+

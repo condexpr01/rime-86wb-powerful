@@ -1,0 +1,42 @@
+# powerful 86 wubi
+# encoding=utf-8
+
+
+schema:
+  name: "帕瓦.power86"
+  schema_id: power86wubi
+  version: "0.0.1"
+  authoer: "Vito <condexpr01@outlook.com>"
+  description: ""
+
+# menu ui
+menu:
+  # 空格,分号,单引(对应3选一页)
+  page_size: 3
+
+  # 首选,主选,备选
+  alternative_select_labels: [ "〔首〕", "〔主〕", "〔备〕",  ]
+
+
+engine:
+  processors:
+
+    #z键lua指令,必须在第一,以esc退出,enter运行
+    - lua_processor@power86_luacmd
+
+    - lua_processor@power86_processor
+    - lua_processor@power86_selector
+
+    - selector # (必需)因无lua api进行ui翻页等
+
+    - lua_processor@power86_sign #(必须压底)
+
+  segmentors:
+    - lua_segmentor@power86_segmentor
+
+  translators:
+    - lua_translator@power86_translator
+
+  filters:
+    - lua_filter@power86_filter
+

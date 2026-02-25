@@ -1,0 +1,18 @@
+
+###########################################
+#  僵尸，芙瓦帕：请不要使用这个方案！！！ #
+###########################################
+
+# 仅作为powerful86wubi以依赖，从而构建powerful86pinyin
+
+schema:
+  name: "芙瓦帕.powerful86pinyin"
+  schema_id: powerful86pinyin
+  version: "2026.02.25.1"
+  authoer: "Vito <condexpr01@outlook.com>"
+  description: "仅用为反编码依赖, 请不要使用这个方案,Do not apply this!!!(僵尸，芙瓦帕)"
+
+translator:
+  dictionary: powerful86pinyin # power86fulwubi.dict.yaml
+  enable_user_dict: false      # 不启用用户词典
+  enable_sentence: false     # 不造句
