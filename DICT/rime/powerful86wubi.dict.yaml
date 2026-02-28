@@ -6372,8 +6372,6 @@ ckfn	欢呼声
 ckfn	马蹄声
 ckfn	马嘶声
 ckfp	驶过
-ckg	马蹄形
-ckg	对口型
 ckga	马蹄形
 ckga	对口型
 ckgf	台球
@@ -35994,7 +35992,7 @@ kkgr	串珠
 kkgu	踌躇不前
 kkgw	咄咄逼人
 kkgw	喋喋不休
-kkh	患
+kkh	串
 kkh	跳跳虎
 kkha	跳跳虎
 kkhk	串
@@ -38694,6 +38692,7 @@ lkgc	加到
 lkgf	圆球
 lkgg	圆环
 lkgg	回环
+lkgk	回事
 lkgk	加速
 lkgo	回来
 lkgy	加班
@@ -47478,20 +47477,15 @@ pghk	定点
 pghk	宣战
 pghu	定
 pghx	安静些
-pgi	宁玛派
-pgi	军事学
-pgi	家政学
 pgia	宣泄
 pgia	写满
 pgid	富源
-pgif	宝洁
+pgif	写法
 pgif	被玷污
 pgij	室温
 pgip	军事学
 pgip	家政学
 pgir	富丽堂皇
-pgir	宁玛派
-pgis	窝瓦河
 pgj	宣
 pgj	冥王星
 pgjf	定时
@@ -49168,6 +49162,7 @@ pvyw	室女座
 pw	穿
 pw	完全
 pw	安全
+pwa	空
 pwa	穿
 pwa	军分区
 pwa	安全区
@@ -56338,6 +56333,7 @@ rmb	扣帽子
 rmbb	罐子
 rmbb	扣帽子
 rmbb	掷骰子
+rmbc	制取
 rmbc	抽取
 rmbm	抽出
 rmbn	失败了
@@ -86863,6 +86859,7 @@ ywxe	文件组
 ywxj	谕旨
 ywxn	论
 ywxn	讹
+ywy	谁
 ywy	认
 ywy	记叙文
 ywy	变化率
@@ -87168,6 +87165,7 @@ yytf	言行
 yytf	文选
 yytg	试读生
 yyth	主计处
+yytk	方程
 yytk	议程
 yytl	主设备
 yytm	文身
@@ -87253,3 +87251,7 @@ ycet	弃用
 pbyn	字词
 hige	频表
 qupb	多音字
+tkya	程度
+ovti	数秒
+rffa	挂载
+xxcf	比对

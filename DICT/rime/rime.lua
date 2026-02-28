@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global, lowercase-global
+---@diagnostic disable: undefined-global, lowercase-global, unused-local
 
 -- 时间
 time = function (input, seg)
@@ -15,12 +15,9 @@ end
 pieces = function (input, seg)
 
 	--快捷编辑
-	if (input == "znv") then
-		os.execute(string.format("%s %s &",
-			"neovide --maximized --title-hidden",
-			"~/.local/share/fcitx5/rime/powerful86wubi.dict.yaml")
-		)
+	if (input == "zxxx") then
 	end
 
 end
 ]]
+
