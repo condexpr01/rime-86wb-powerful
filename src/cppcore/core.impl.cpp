@@ -289,38 +289,134 @@ namespace table{
 		return e;
 	}
 
-		template <typename T>
-		requires requires(T f,pair<string,vector<string>> p){{f(p)}->same_as<bool>;}
-		ep<void> table_t::output_table(ostream &out, T fileter){
-		
+	ep<void> make_vector_table(ifstream& ifs,
+		vector<pair<string,vector<string>>>& v,
+						const table_category cat){
+
+		ep<void> e{};
+		v.clear();
+
+		//cat为key_codec,期望键存在编码,对应位置:[编码],序号=字词,频数
+		//cat为key_word ,期望键存在字词,对应位置:编码,序号=[字词],频数
+
+		string line;
+		string a,b,c,d;
+
+		const size_t startpos = 0;
+
+		size_t a_endpos;
+		size_t b_endpos;
+		size_t c_endpos;
+		[[maybe_unused]] size_t d_endpos;
+
+		bool a_exist;
+		bool b_exist;
+		bool c_exist;
+		[[maybe_unused]]bool d_exist;
+
+		while(true){
+
+			if(getline(ifs,line,'\n')){
+
+				//降噪去0x0d
+				if(line.empty()) continue;
+				if(line.back() == '\r')line.pop_back();
+
+				//降噪去空白
+				line.erase(std::remove_if(line.begin(),line.end(),
+								 [](char c){return std::isspace(c);})
+				  ,line.end());
+
+				//opt pattern: "编码或字词,"
+				a_endpos = line.find(',',startpos);
+				a_exist = (a_endpos != string::npos);
+
+				//opt pattern: "序号="
+				b_endpos = line.find('=',a_endpos + a_exist);
+				b_exist = (b_endpos != string::npos);
+
+				//opt pattern: "字词或编码,"
+				c_endpos = line.find(',',b_endpos + b_exist);
+				c_exist = (c_endpos != string::npos);
+
+				//opt pattern: "频数"
+				//c_endpos到string::npos
+
+				a = string_slice(line,startpos          ,a_endpos);
+				b = string_slice(line,a_endpos + a_exist,b_endpos);
+				c = string_slice(line,b_endpos + b_exist,c_endpos);
+				d = string_slice(line,c_endpos + c_exist,string::npos);
+
+			}else if(!ifs.eof()){
+				e = unep{"Error: Didn't get to EOF."};
+				break;
+
+			}else{break;}
+
+
+			//过滤无键名的格式,确保有键名
+			//key_codec下a为key 具体位置: "[编码],序号=字词,频数"
+			//key_word 下c为key 具体位置: "编码,序号=[字词],频数"
+
+			//key_codec
+			if(cat == table_category::key_codec) do{
+				if(a.empty()){
+					cerr << "line: " << string_visiable(line)
+						<< " [fmt need]: " << "[编码],序号=字词,频数" << endl;
+					break;}
+
+				v.emplace_back(a,vector<string>{b,c,d});
+
+			}while(false);
+
+			//key_word
+			if(cat == table_category::key_word) do{
+				if(c.empty()){
+					cerr << "line: " << string_visiable(line) 
+						<< " [fmt need]: " << "编码,序号=[字词],频数" << endl;
+					break;}
+
+				v.emplace_back(c,vector<string>{a,b,d});
+
+			}while(false);
+
+		}
+
+		return e;
+	}
+
+	template <typename T>
+	requires requires(T f,pair<string,vector<string>> p){{f(p)}->same_as<bool>;}
+	ep<void> table_t::output_table(ostream &out, T fileter){
+
 		if((*this).category == table_category::key_codec){
-		for (auto &&v : (*this).table){
-			if(!fileter(v))continue;
+			for (auto &&v : (*this).table){
+				if(!fileter(v))continue;
 
-			//fmt:字词或编码[键],序号0=编码或字词1,频数2
-			out << format("{},{}={},{}\n",
-			string_visiable(v.first),
-			string_visiable(v.second[0]),
-			string_visiable(v.second[1]),
-			string_visiable(v.second[2])
-			);
+				//fmt:字词或编码[键],序号0=编码或字词1,频数2
+				out << format("{},{}={},{}\n",
+					 string_visiable(v.first),
+					 string_visiable(v.second[0]),
+					 string_visiable(v.second[1]),
+					 string_visiable(v.second[2])
+					 );
 
-			out.flush();
-		}}
+				out.flush();
+			}}
 
 		if((*this).category == table_category::key_word){
-		for (auto &&v : (*this).table){
-			if(!fileter(v))continue;
+			for (auto &&v : (*this).table){
+				if(!fileter(v))continue;
 
-			out << format("{},{}={},{}\n",
-			string_visiable(v.second[0]),
-			string_visiable(v.second[1]),
-			string_visiable(v.first),
-			string_visiable(v.second[2])
-			);
+				out << format("{},{}={},{}\n",
+					 string_visiable(v.second[0]),
+					 string_visiable(v.second[1]),
+					 string_visiable(v.first),
+					 string_visiable(v.second[2])
+					 );
 
-			out.flush();
-		}}
+				out.flush();
+			}}
 
 		return {};
 	}

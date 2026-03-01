@@ -30,16 +30,18 @@ clean:
 	-rm ../bin/codec-set-intersect
 	-rm ../bin/codec-set-unite
 	-rm ../bin/codec-set-difference
-	-rm ../bin/codec-seq-sort
 
 	-rm ../bin/pinyin-normalize
 
-	-rm ../bin/freq-sort
+	-rm ../bin/sort-freq
 
-	-rm ../bin/make-seq
-	-rm ../bin/make-seq-wbfilter
+	-rm ../bin/sort-codec-seq
+	-rm ../bin/sort-codec-seq-wbfilter
 
-	#-rm ../bin/cppt
+	-rm ../bin/make-seq-from-freq
+	-rm ../bin/make-seq-from-freq-wbfilter
+
+	-rm ../bin/cppt
 
 	-rm ../src/binsrc/compile_commands.json
 	-rm -rf ../src/binsrc/.cache

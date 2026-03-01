@@ -7,5 +7,5 @@ if [ -z "$1" ]; then
 	echo "dictionary_file format: 编码,序号=字词,频数\n"
 	exit 1
 else
-	"${SCRIPT_DIR}"/codec-seq-sort "${1}" | sed 's/^\([^,]*\),[^=]*=\([^,]*\).*$/\1\t\2/'
+	"${SCRIPT_DIR}"/sort-codec-seq "${1}" | sed 's/^\([^,]*\),[^=]*=\([^,]*\).*$/\1\t\2/'
 fi

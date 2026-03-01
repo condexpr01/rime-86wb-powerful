@@ -6,7 +6,9 @@ make
 ```
 
 # 标准格式
-> codec,seq=word,freq
+
+> `codec,seq=word,freq`
+
 ```txt
 以`编码,序号=字词,频数`形成的多行utf-8文本
 
@@ -39,7 +41,9 @@ wv,3=做好,612346
      breakup-word          # 标准格式按字词长度拆分
      breakups-merge        # 合并拆分
 
-     codec-seq-sort        # 标准格式,按编码排序,同编码的按序号排,同时修补序号
+     sort-freq             # 标准格式,按频数排序
+     sort-codec-seq        # 标准格式,按编码排序,同编码的按序号排,同时修补序号
+
      codec-set-difference  # 标准格式,按编码计算表1和表2的差集(表1中存在而表2中不存在)
      codec-set-intersect   # 标准格式,按编码计算表1和表2的交集
      codec-set-unite       # 标准格式,按编码计算表1和表2的并集
@@ -51,13 +55,11 @@ wv,3=做好,612346
      encoder               # 标准格式,编码器,对字词生成编码
      encoder-with-filter   # 标准格式,编码器,过滤不能编码的字词
 
-     freq-sort             # 标准格式,按频数排序
-
      get-freq              # 标准格式,为码表从频表中获取频数
      get-freq-with-filter  # 标准格式,为码表从频表中获取频数,过滤得不到频数的
 
-     make-seq              # 标准格式,以频数为依据生成序号
-     make-seq-wbfilter     # 标准格式,以频数为依据生成序号,同时过滤在3号位以后的词
+     make-seq-from-freq              # 标准格式,以频数为依据生成序号
+     make-seq-from-freq-wbfilter     # 标准格式,以频数为依据生成序号,同时过滤在3号位以后的词
 
      ollama-filter         # 标准格式,尝试以ollama ai模型生成过滤信息
 
@@ -145,7 +147,7 @@ wv,20=你好,
 a,1=工,
 wv,30=做好,
 
-运行: codec-seq-sort a
+运行: sort-codec-seq a
 结果: 
 a,1=工,
 b,1=子,
@@ -187,7 +189,9 @@ word-set-difference,word-set-intersect,word-set-unite逻辑和上面一样
 
 
 #####################
-从github仓库上可以找到人名，地名等仓库，取数据转换为标准格式后，
+从github仓库上可以找到人名，地名等仓库
+如git@github.com:wainshine/Chinese-Names-Corpus.git，
+取数据转换为标准格式后，
 用word-set-difference就可以去人名，地名等
 
 统计生成的数据频表,可以用word-set-unite取并集,如
@@ -227,7 +231,7 @@ wqvb,=你好,
 ,=式,3816084
 ,=某某,391924
 
-运行: freq-sort a
+运行: sort-freq a
 结果: 
 ,=式,3816084
 ,=某某,391924
@@ -267,7 +271,7 @@ aa,=,3816084
 aa,=,391924
 
 
-运行: make-seq a
+运行: make-seq-from-freq a
 结果: 
 aa,1=,3816084
 aa,2=,391924

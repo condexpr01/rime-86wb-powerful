@@ -32,7 +32,7 @@ function(add_bin_tool name src)
 	install(TARGETS ${name} RUNTIME DESTINATION bin)
 endfunction()
 
-#add_bin_tool(cppt binsrc/cppt.cpp)
+add_bin_tool(cppt binsrc/cppt.cpp)
 
 add_bin_tool(encoder binsrc/encoder.cpp)
 add_bin_tool(encoder-with-filter binsrc/encoder-with-filter.cpp)
@@ -46,12 +46,14 @@ add_bin_tool(word-set-difference binsrc/word-set-difference.cpp)
 
 add_bin_tool(pinyin-normalize binsrc/pinyin-normalize.cpp)
 
-add_bin_tool(freq-sort binsrc/freq-sort.cpp)
+add_bin_tool(sort-freq binsrc/sort-freq.cpp)
+add_bin_tool(sort-codec-seq binsrc/sort-codec-seq.cpp)
+add_bin_tool(sort-codec-seq-wbfilter binsrc/sort-codec-seq-wbfilter.cpp)
 
-add_bin_tool(make-seq binsrc/make-seq.cpp)
-add_bin_tool(make-seq-wbfilter binsrc/make-seq-wbfilter.cpp)
+add_bin_tool(make-seq-from-freq binsrc/make-seq-from-freq.cpp)
+add_bin_tool(make-seq-from-freq-wbfilter binsrc/make-seq-from-freq-wbfilter.cpp)
 
-add_bin_tool(codec-seq-sort binsrc/codec-seq-sort.cpp)
+
 add_bin_tool(codec-set-intersect binsrc/codec-set-intersect.cpp)
 add_bin_tool(codec-set-unite binsrc/codec-set-unite.cpp)
 add_bin_tool(codec-set-difference binsrc/codec-set-difference.cpp)

@@ -101,7 +101,9 @@ namespace table{
 	//递归地显示目录结构
 	inline ep<void> dir_layout(ostream& output,const string &s_path);
 
-
+	//用vector<pair<string,vector<string>>>表示的table,
+	//与table_t不同的是, 元素顺序与读入先后顺序有关
+	ep<void> make_vector_table(ifstream& ifs,vector<pair<string,vector<string>>>& v,const table_category cat);
 
 	//string切片视图,闭开区间(返回必正常,无unep)
 	inline string_view string_slice(const string_view &s,
@@ -154,15 +156,6 @@ namespace table{
 	ep<void> codec_set_intersect(table_t &intersection,const table_t &with);
 	ep<void> codec_set_difference(table_t &difference,const table_t &with);
 }
-
-
-
-
-
-
-
-
-
 
 
 
