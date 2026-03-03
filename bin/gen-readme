@@ -33,8 +33,12 @@ preformance(){
 	printf '\n---\n\n'
 }
 
-q1dash1() { echo -n $(grep -P "^${1},1=" ${dict} | sed 's/^.,1=//' |sed 's/,[0-9]*$//'); }
-q1dash2() { echo -n $(grep -P "^${1},2=" ${dict} | sed 's/^.,2=//' |sed 's/,[0-9]*$//'); }
+q1dash1() { echo -n $(grep -P "^${1},1=" ${dict} | \
+			perl -CA -pe 's/^[^,],1=//' | \
+			perl -CA -pe 's/,[0-9]*$//'); }
+q1dash2() { echo -n $(grep -P "^${1},2=" ${dict} | \
+			perl -CA -pe 's/^[^,],2=//' | \
+			perl -CA -pe 's/,[0-9]*$//'); }
 
 t1() {
 	printf '## <font color=#39c5bb> :sparkles: 1码 </font>\n'
@@ -67,8 +71,8 @@ t1() {
 
 }
 
-qvdash1() { echo -n $(grep -P "^${v}${1},1=" ${dict}|sed 's/,[0-9]*$//'); }
-qvdash2() { echo -n $(grep -P "^${v}${1},2=" ${dict}|sed 's/,[0-9]*$//'); }
+qvdash1() { echo -n $(grep -P "^${v}${1},1=" ${dict}|perl -CA -pe 's/,[0-9]*$//'); }
+qvdash2() { echo -n $(grep -P "^${v}${1},2=" ${dict}|perl -CA -pe 's/,[0-9]*$//'); }
 
 t2() {
 
@@ -101,8 +105,8 @@ t2() {
 
 }
 
-q3dash1len3() { echo -n "$(grep -P "^...,1=[^,][^,][^,]" ${dict} |sed 's/,[0-9]*$//')"; }
-q3dash2len3() { echo -n "$(grep -P "^...,2=[^,][^,][^,]" ${dict} |sed 's/,[0-9]*$//')"; }
+q3dash1len3() { echo -n "$(grep -P "^...,1=[^,][^,][^,]" ${dict} |perl -CA -pe 's/,[0-9]*$//')"; }
+q3dash2len3() { echo -n "$(grep -P "^...,2=[^,][^,][^,]" ${dict} |perl -CA -pe 's/,[0-9]*$//')"; }
 
 t3() {
 
@@ -130,8 +134,8 @@ t3() {
 }
 
 
-q4dash1len4() { echo -n "$(grep -P "^....,1=[^,][^,][^,][^,]" ${dict}|sed 's/,[0-9]*$//' )"; }
-q4dash2len4() { echo -n "$(grep -P "^....,2=[^,][^,][^,][^,]" ${dict}|sed 's/,[0-9]*$//' )"; }
+q4dash1len4() { echo -n "$(grep -P "^....,1=[^,][^,][^,][^,]" ${dict}|perl -CA -pe 's/,[0-9]*$//' )"; }
+q4dash2len4() { echo -n "$(grep -P "^....,2=[^,][^,][^,][^,]" ${dict}|perl -CA -pe 's/,[0-9]*$//' )"; }
 
 t4() {
 	printf '\n## <font color=#39c5bb> :sparkles: 4码 </font>\n'
