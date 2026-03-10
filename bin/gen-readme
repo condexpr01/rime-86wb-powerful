@@ -162,7 +162,7 @@ t4() {
 }
 
 prefix() {
-	cat << EOF >> "$1"
+	cat << EOF
 
 # <font color=#39c5bb> :sparkles: 跳转 </font>
 
@@ -257,7 +257,7 @@ EOF
 }
 
 suffix() {
-	cat << EOF >> "$1"
+	cat << EOF
 <font color=#ff0044>
 
 <center>$(date)</center><br>
@@ -271,20 +271,18 @@ EOF
 
 
 all() {
-	touch "$1" && echo '' > "$1"
+	prefix
 
-	prefix "$1"
+	printf "\n\n# <font color=#39c5bb>:sparkles: 词库</font>\n\n"
 
-	printf "\n\n# <font color=#39c5bb>:sparkles: 词库</font>\n\n" >> "$1"
+	echo "$(sort-rule)"
+	echo "$(preformance)"
+	echo "$(t1)"
+	echo "$(t2)"
+	echo "$(t3)"
+	echo "$(t4)"
 
-	echo "$(sort-rule)" >> "$1"
-	echo "$(preformance)" >> "$1"
-	echo "$(t1)" >> "$1"
-	echo "$(t2)" >> "$1"
-	echo "$(t3)" >> "$1"
-	echo "$(t4)" >> "$1"
-
-	suffix "$1"
+	suffix
 }
 
 
