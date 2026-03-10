@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$1" ]; then
+if [ -z "$1" ] && ! [ -f "$file" ]; then
 	echo "Usage: $0 <dictionary_file>"
 	echo "dictionary_file format: 编码\t字词\n"
 	exit 1

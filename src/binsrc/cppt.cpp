@@ -9,33 +9,6 @@ using namespace table;
 int main(){
 
 	/*
-	string error,value;
-	epw(string_add("2","8"),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-
-	epw(string_add("1234567890","1"),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-
-	epw(string_sub("12345","3456"),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-
-	epw(string_sub("1","123456789"),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-
-	epw(string_add("",""),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-
-	epw(string_sub("",""),error,value);
-	if (error.empty()){cout << value << endl;}
-	else{cout << error << endl;}
-	*/
-
-	/*
 	vector<pair<int,string>> v{{1,""},{2,""},{3,"asdf"},{4,"asd"}};
 
 	std::sort(v.begin(),v.end(),[](const auto &a ,const auto &b){

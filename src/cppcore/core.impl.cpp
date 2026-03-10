@@ -15,7 +15,8 @@ namespace table{
 		table_category category = table_category::key_none;
 
 		//构造表对象时的错误信息
-		string error;
+		error_type error = nullptr;
+		bool is_ok = false;
 
 		using iterator = table_type::iterator;
 		using const_iterator = table_type::const_iterator;
@@ -78,9 +79,9 @@ namespace table{
 			ifstream ifs{filename};
 
 			if (ifs.is_open()){
-				epw((*this).make_table(ifs,cat), error);
+				epcall((*this).make_table(ifs,cat), error, is_ok);
 			}else{
-				error =  "Failed to open the file.";
+				error =  "[table_t method]Failed to open the file.";
 			}
 		}
 
@@ -89,9 +90,9 @@ namespace table{
 		requires same_as<remove_cvref_t<EP>, ep<ifstream>>
 		table_t(EP &&ep_ifs, table_category cat = table_category::key_codec){
 			ifstream ifs;
-			epw(std::move(ep_ifs),error,ifs);
+			epcall(std::move(ep_ifs),ifs,error,is_ok);
 
-			if (error.empty()){epw((*this).make_table(ifs,cat),error);}
+			if (is_ok){epcall((*this).make_table(ifs,cat),error,is_ok);}
 		}
 
 
@@ -202,6 +203,7 @@ namespace table{
 		//cat为key_codec,期望键存在编码,对应位置:[编码],序号=字词,频数
 		//cat为key_word ,期望键存在字词,对应位置:编码,序号=[字词],频数
 		(*this).category = cat;
+		(*this).is_ok = false;
 		
 		string line;
 		string a,b,c,d;
@@ -286,6 +288,7 @@ namespace table{
 
 		}
 		
+		(*this).is_ok = true;
 		return e;
 	}
 
@@ -938,7 +941,9 @@ namespace table{
 			return unep{"Error(intersect): The category should be both table_category::key_word."};
 		}
 
-		string warn{},value{};
+		string value{};
+		error_type warn = nullptr;
+		bool is_ok = false;
 
 		for(auto &&i = intersection.begin(); i != intersection.end();){
 			auto w = with.find((*i).first);
@@ -955,10 +960,10 @@ namespace table{
 						break;
 					}
 
-					epw(string_add((*i).second[2],(*w).second[2]),warn,value);
-					if(!warn.empty()){
+					epcall(string_add((*i).second[2],(*w).second[2]),value,warn,is_ok);
+					if(!is_ok){
 						cerr << format("Warning(unite): {}\n",warn);
-						warn.clear();
+						warn = nullptr;
 						value.clear();
 						break;
 					}else{(*i).second[2] = value;break;}
@@ -991,7 +996,10 @@ namespace table{
 			return unep{"Error(unite): The category should be both table_category::key_word."};
 		}
 
-		string warn{},value{};
+		string value{};
+		error_type warn = nullptr;
+		bool is_ok = false;
+
 
 		for(auto &&w : with){
 			auto u = union_set.find(w.first);
@@ -1010,10 +1018,10 @@ namespace table{
 						break;
 					}
 
-					epw(string_add(w.second[2],(*u).second[2]),warn,value);
-					if(!warn.empty()){
+					epcall(string_add(w.second[2],(*u).second[2]),value,warn,is_ok);
+					if(!is_ok){
 						cerr << format("Warning(unite): {}\n",warn);
-						warn.clear();
+						warn=nullptr;
 						value.clear();
 						break;
 					}else{(*u).second[2] = value;break;}

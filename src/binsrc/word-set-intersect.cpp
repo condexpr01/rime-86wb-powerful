@@ -1,4 +1,3 @@
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
@@ -10,19 +9,20 @@ int main(int argc ,char *argv[]) try {
 		throw std::runtime_error("Error arguments.");
 	}
 
-	string error;
+	error_type error = nullptr;
+	bool is_ok = false;
 
 	table::table_t a(argv[1],table_category::key_word);
-	if (!a.error.empty()){throw std::runtime_error(a.error.c_str());}
+	if (!a.is_ok){throw std::runtime_error(a.error);}
 
 	table::table_t b(argv[2],table_category::key_word);
-	if (!b.error.empty()){throw std::runtime_error(b.error.c_str());}
+	if (!b.is_ok){throw std::runtime_error(b.error);}
 
-	epw(a.word_set_intersect(b),error);
-	if(!error.empty())cerr << error << endl;
+	epcall(a.word_set_intersect(b),error,is_ok);
+	if(!is_ok)cerr << error << endl;
 
-	epw(a.output_table(cout),error);
-	if(!error.empty())cerr << error << endl;
+	epcall(a.output_table(cout),error,is_ok);
+	if(!is_ok)cerr << error << endl;
 
 	return 0;
 
@@ -33,6 +33,7 @@ int main(int argc ,char *argv[]) try {
 } catch (int v){
 	return v;
 }
+
 
 
 

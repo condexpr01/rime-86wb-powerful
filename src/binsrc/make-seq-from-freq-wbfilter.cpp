@@ -1,15 +1,13 @@
-
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
 
 int main(int argc ,char *argv[]) try {
 
-	string error;
+	error_type error = nullptr;
 
 	table_t t{detect_file_from_args(argc,argv),table_category::key_codec};
-	if(!t.error.empty()){throw std::runtime_error{t.error.c_str()};}
+	if(!t.is_ok){throw std::runtime_error{t.error};}
 	
 	//比table_t的string多套个vector用来聚合
 	//seq: first,second[x][0]=second[x][1],second[x][2]

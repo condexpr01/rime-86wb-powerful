@@ -13686,7 +13686,6 @@ drgd	大热天
 drge	万年青
 drgf	有损于
 drgg	大提琴
-drgj	原理
 drgl	百折不回
 drgn	在所不惜
 drgo	原来
@@ -19996,7 +19995,6 @@ fhiu	越洋
 fhiy	直流
 fhj	截止日
 fhjc	赶紧
-fhjf	走时
 fhjf	超时
 fhjf	越野
 fhjg	真是
@@ -30327,7 +30325,6 @@ gxkk	刺绣品
 gxl	不费力
 gxl	不给力
 gxl	副编辑
-gxlf	互转
 gxlk	副编辑
 gxlp	互连
 gxlt	毒力
@@ -44638,7 +44635,7 @@ kkgr	串珠
 kkgu	踌躇不前
 kkgw	咄咄逼人
 kkgw	喋喋不休
-kkh	患
+kkh	串
 kkh	跳跳虎
 kkha	跳跳虎
 kkhc	串皮
@@ -47397,7 +47394,6 @@ lfwo	团伙
 lfws	团体
 lfws	黑体
 lfws	转体
-lfwu	转位
 lfww	黑人
 lfwx	转化
 lfwy	围住
@@ -74302,7 +74298,6 @@ sate	横盘
 satf	横行
 satf	横街
 satg	横生
-sath	模版
 satj	枕戈待旦
 satk	核工程
 satk	酶工程
@@ -77943,7 +77938,6 @@ svtr	要我
 svtx	根系
 svub	要闻
 svuh	要站
-svuj	根音
 svuk	根部
 svuk	概况
 svum	要端
@@ -80075,9 +80069,9 @@ tfws	午休
 tfwt	选任
 tfwt	造作
 tfwv	等分
+tfww	等价
 tfww	造价
 tfww	等人
-tfww	等价
 tfwx	造化
 tfwx	自动化
 tfwy	选集
@@ -82764,7 +82758,6 @@ tqbj	衡阳
 tqbk	称职
 tqbm	移出
 tqbn	自然也
-tqbw	先锋队
 tqbw	移除
 tqcd	生杀予夺
 tqd	稀
@@ -87496,8 +87489,8 @@ ujqh	意外
 ujqi	音乐
 ujqj	意象
 ujqk	音名
-ujqk	单句
 ujql	单链
+ujqk	单句
 ujqn	竭
 ujqt	单独
 ujqu	韵
@@ -108241,7 +108234,7 @@ yywf	座谈会
 yywf	议会
 yywf	讨论会
 yywf	谇
-yywg	试剂盒
+yywg	方便
 yywq	谢谢你
 yywr	文件
 yywr	库文件
@@ -108298,3 +108291,9 @@ yyyw	认识论
 yyyx	应变率
 yyyy	言
 yyyy	方言
+svuj	根音
+lfwu	转位
+sath	模版
+drgj	原理
+gxlf	互转
+pgwu	定位

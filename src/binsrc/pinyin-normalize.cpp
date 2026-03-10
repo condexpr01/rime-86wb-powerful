@@ -1,5 +1,3 @@
-
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
@@ -8,17 +6,18 @@ using namespace table;
 //seperator不能为whitesapce(这在make_table的时候会被当噪声去掉)
 int main(int argc ,char *argv[]) try {
 
-	string error;
+	error_type error = nullptr;
+	bool is_ok = false;
 
 	table_t pinyin{detect_file_from_args(argc,argv),table_category::key_codec};
-	if(!pinyin.error.empty()){throw std::runtime_error{pinyin.error.c_str()};}
+	if(!pinyin.is_ok){throw std::runtime_error{pinyin.error};}
 	
 	vector<string> buffer{};
 	string seperators{"/"};
 	for (auto &&k : pinyin){
 
-		epw(string_sep_vector(k.first,seperators,buffer),error);
-		if(!error.empty()){throw std::runtime_error{error.c_str()};}
+		epcall(string_sep_vector(k.first,seperators,buffer),error,is_ok);
+		if(!is_ok){throw std::runtime_error{error};}
 
 		for (auto &&kb : buffer){
 			cout << format("{},{}={},{}\n",

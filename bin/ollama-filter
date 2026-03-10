@@ -2,7 +2,7 @@
 
 # 按行用ai模型对词典进行过滤
 
-if [ -z "$1" ]; then
+if [ -z "$1" ] && ! [ -f "$file" ]; then
 	echo "Usage: $0 <dictionary-file>"
 	echo "dictionary_file std format: 编码,序号=字词[,频数]\n"
 	exit 1

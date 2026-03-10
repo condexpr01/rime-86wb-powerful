@@ -18,35 +18,60 @@
 
 namespace table{
 	
-	//异常ep unep
-	template<typename T>
-	using ep = std::expected<T,std::string>;
-	using unep = std::unexpected<std::string>;
-	
-	//ep wrapper, 保留值
-	template<typename T>
-	inline void epw(ep<T> &&r,std::string &s,T &value){
-		if (r.has_value()){
-			s.clear();
-			value = std::move(r.value());
-		}else s = std::move(r.error());
-	};
-	
-	//ep wrapper void重载,弃值
-	template<typename T>
-	inline void epw(ep<T> &r,std::string &s){
-		if (r.has_value()){
-			s.clear();
-		}else s = r.error();
-	};
+	//错误串类型
+	typedef const char* error_type;
 
-	//ep wrapper void重载,弃值
+	//错误类型
 	template<typename T>
-	inline void epw(ep<T> &&r,std::string &s){
-		if (r.has_value()){
-			s.clear();
-		}else s = std::move(r.error());
-	};
+	using ep = std::expected<T,error_type>;
+	using unep = std::unexpected<error_type>;
+
+	//错误串空检测
+	template<typename errT>
+	inline bool is_error_empty(errT error)
+	requires requires(errT s){
+		{!s}->std::convertible_to<bool>;
+		{*s}->std::convertible_to<const char>;
+	}{
+		return !error || (*error == '\0');
+	}
+
+	//便捷调用并转移值
+	//当然也可以用expected原生and_then, or_else, transform, transform_error
+	template <typename epT,typename returnT>
+	void epcall(epT&& epr, returnT &value, error_type &error, bool &is_ok) {
+		if (epr.has_value()) {
+			is_ok = true;
+			error = nullptr;
+			value = std::move(epr.value());
+		} else {
+			is_ok = false;
+			error = epr.error(); // 指针无需move
+		}
+	}
+	
+	//epcall弃值版重载
+	template <typename epT>
+	void epcall(epT&& epr, error_type &error, bool &is_ok) {
+		if (epr.has_value()) {
+			is_ok = true;
+			error = nullptr;
+		} else {
+			is_ok = false;
+			error = epr.error();
+		}
+	}
+
+	//epcall弃值,弃状态版重载
+	template <typename epT>
+	void epcall(epT&& epr, error_type &error) {
+		if (epr.has_value()) {
+			error = nullptr;
+		}else{
+			error = epr.error();
+		}
+	}
+
 	
 	//ios
 	using std::cout;

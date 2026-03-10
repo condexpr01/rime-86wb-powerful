@@ -1,4 +1,3 @@
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
@@ -10,20 +9,21 @@ int main(int argc ,char *argv[]) try {
 		throw std::runtime_error("Error arguments.");
 	}
 
-	string error;
+	error_type error = nullptr;
+	bool is_ok = false;
 
 	table::table_t s(argv[1],table_category::key_word);
-	if (!s.error.empty()){throw std::runtime_error(s.error.c_str());}
+	if (!s.is_ok){throw std::runtime_error(s.error);}
 
 	table::table_t t(argv[2],table_category::key_word);
-	if (!t.error.empty()){throw std::runtime_error(t.error.c_str());}
+	if (!t.is_ok){throw std::runtime_error(t.error);}
 
-	epw(t.encoder(s),error);
-	if(!error.empty())cerr << error << endl;
+	epcall(t.encoder(s),error,is_ok);
+	if(!is_ok)cerr << error << endl;
 
-	//epw(t.output_table(cout,table_t::encoder_filter),error);
-	epw(t.output_table(cout),error);
-	if(!error.empty())cerr << error << endl;
+	//epcall(t.output_table(cout,table_t::encoder_filter),error,is_ok);
+	epcall(t.output_table(cout),error,is_ok);
+	if(is_ok)cerr << error << endl;
 
 	return 0;
 

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+file=${1}
+
+relative_freq_dir=${2:-"share/freq/freq"}
+
+if ! [ -f "$relative_freq_dir" ]; then
+	echo "freq file not found : ${relative_freq_dir}"
+	exit 1
+fi
+
+if [ -z "$file" ] && ! [ -f "$file" ]; then
+	echo "Usage: $0 <dictionary_file>"
+	echo "dictionary_file format: 编码\t字词\n"
+	exit 1
+
+else
+
+	${SCRIPT_DIR}/sort-codec-seq \
+		<(${SCRIPT_DIR}/get-freq ${relative_freq_dir} \
+		<(${SCRIPT_DIR}/rime-to-fmt ${1}))
+
+fi

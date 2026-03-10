@@ -1,5 +1,3 @@
-
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
@@ -11,19 +9,20 @@ int main(int argc ,char *argv[]) try {
 		throw std::runtime_error("Error arguments.");
 	}
 
-	string error;
+	error_type error = nullptr;
+	bool is_ok = false;
 
 	table::table_t from(argv[1],table_category::key_word);
-	if (!from.error.empty()){throw std::runtime_error(from.error.c_str());}
+	if (!from.is_ok){throw std::runtime_error(from.error);}
 
 	table::table_t to(argv[2],table_category::key_word);
-	if (!to.error.empty()){throw std::runtime_error(to.error.c_str());}
+	if (!to.is_ok){throw std::runtime_error(to.error);}
 
-	epw(to.get_freq(from),error);
-	if(!error.empty())cerr << error << endl;
+	epcall(to.get_freq(from),error,is_ok);
+	if(!is_ok)cerr << error << endl;
 
-	epw(to.output_table(cout, table_t::get_freq_filter),error);
-	if(!error.empty())cerr << error << endl;
+	epcall(to.output_table(cout, table_t::get_freq_filter),error,is_ok);
+	if(!is_ok)cerr << error << endl;
 
 	return 0;
 

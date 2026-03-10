@@ -1,4 +1,3 @@
-
 #include "../cppcore/core.impl.cpp"
 
 using namespace table;
@@ -6,16 +5,17 @@ using namespace table;
 
 int main(int argc ,char *argv[]) try {
 
-	string error;
+	error_type error = nullptr;
+	bool is_ok = false;
 
 	vector<pair<string,vector<string>>> table;
 	
 	ifstream ifs;
-	epw(detect_file_from_args(argc,argv),error,ifs);
-	if(!error.empty()){throw std::runtime_error{error.c_str()};}
+	epcall(detect_file_from_args(argc,argv),ifs,error,is_ok);
+	if(!is_ok){throw std::runtime_error{error};}
 
-	epw(make_vector_table(ifs,table,table_category::key_codec),error);
-	if(!error.empty()){throw std::runtime_error{error.c_str()};}
+	epcall(make_vector_table(ifs,table,table_category::key_codec),error,is_ok);
+	if(!is_ok){throw std::runtime_error{error};}
 	
 	//比table_t的string多套个vector用来聚合
 	//seq: first,second[x][0]=second[x][1],second[x][2]
